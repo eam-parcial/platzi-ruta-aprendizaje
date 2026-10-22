@@ -1,0 +1,16 @@
+{
+  "rutas": [
+    { "id": "ruta-web", "nombre": "Ruta de Desarrollo Web", "porcentaje_avance": 62, "cursos_total": 8, "cursos_completados": 5 },
+    { "id": "ruta-datos", "nombre": "Ruta de Análisis de Datos", "porcentaje_avance": 18, "cursos_total": 6, "cursos_completados": 1 }
+  ],
+  "cursos": [
+    { "id": "c-html", "ruta_id": "ruta-web", "nombre": "Fundamentos de HTML y CSS", "estado": "completado" },
+    { "id": "c-jsb", "ruta_id": "ruta-web", "nombre": "JavaScript Básico", "estado": "completado" },
+    { "id": "c-jsa", "ruta_id": "ruta-web", "nombre": "JavaScript Avanzado", "estado": "en_curso" },
+    { "id": "c-test", "ruta_id": "ruta-web", "nombre": "Testing con JavaScript", "estado": "no_iniciado" },
+    { "id": "c-sql", "ruta_id": "ruta-datos", "nombre": "SQL Básico", "estado": "en_curso" }
+  ],
+  "progreso": [
+    { "id": "p-001", "estudiante_id": "est-001", "curso_id": "c-jsa", "porcentaje_avance": 58, "fecha_actualizacion": "2026-10-10" }
+  ]
+}

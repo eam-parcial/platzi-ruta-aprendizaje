@@ -1,0 +1,12 @@
+{
+  "clases_en_vivo": [
+    { "id": "cl-001", "curso_id": "c-jsa", "fecha": "2026-10-16T19:00", "tipo": "Platzi Live", "titulo": "Arquitectura de componentes" },
+    { "id": "cl-002", "curso_id": "c-test", "fecha": "2026-10-20T19:00", "tipo": "Platzi Live", "titulo": "Preguntas de Testing" }
+  ],
+  "entregas": [
+    { "id": "en-001", "curso_id": "c-jsa", "estudiante_id": "est-001", "fecha_limite": "2026-10-21T23:59", "estado": "pendiente", "titulo": "Proyecto final JS Avanzado" }
+  ],
+  "evaluaciones": [
+    { "id": "ev-001", "curso_id": "c-jsa", "estudiante_id": "est-001", "fecha_limite": "2026-10-15T23:59", "estado": "pendiente", "titulo": "Quiz: Closures" }
+  ]
+}

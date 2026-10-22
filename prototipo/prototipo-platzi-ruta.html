@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Platzi Ruta — Prototipo navegable v0.1</title>
+<style>
+:root{--bg:#EEF1F6;--app:#FFFFFF;--card:#F3F5F9;--bd:#DDE2EB;--tx:#0B1220;--mu:#5B6577;--gr:#0A8F55;--grs:#D8F5E6;--gt:#FFFFFF;--wa:#B45309;--was:#FEF3C7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#05070C;--app:#0A0E17;--card:#111827;--bd:#1F2937;--tx:#F3F6FB;--mu:#8B95A7;--gr:#00E58A;--grs:#0B3B22;--gt:#04210F;--wa:#FBBF24;--was:#3A2A05}}
+:root[data-theme="dark"]{--bg:#05070C;--app:#0A0E17;--card:#111827;--bd:#1F2937;--tx:#F3F6FB;--mu:#8B95A7;--gr:#00E58A;--grs:#0B3B22;--gt:#04210F;--wa:#FBBF24;--was:#3A2A05}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--tx);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;justify-content:center;min-height:100vh}
+.phone{width:100%;max-width:400px;background:var(--app);display:flex;flex-direction:column;height:100vh;max-height:820px;margin:auto;border:1px solid var(--bd);border-radius:22px;overflow:hidden}
+@media (max-width:420px){.phone{border-radius:0;max-height:none;border:0}}
+.scr{display:none;flex:1;overflow-y:auto;padding:18px 16px 12px}.scr.on{display:block}
+h1{font-size:20px}h2{font-size:15px;margin:16px 0 8px}small,.mu{color:var(--mu);font-size:12px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--gr);color:var(--gt);font-weight:700;border:0;cursor:pointer}
+.back{background:none;border:0;color:var(--gr);font-weight:600;cursor:pointer;margin-bottom:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin:6px 0 2px}.bar i{display:block;height:100%;background:var(--gr)}
+.btn{background:var(--gr);color:var(--gt);border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
+.btn.s{background:transparent;color:var(--gr);border:1px solid var(--gr)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--grs);color:var(--gr)}
+.tag.w{background:var(--was);color:var(--wa)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.go{cursor:pointer}
+.chips{display:flex;gap:6px;margin:8px 0;flex-wrap:wrap}.chip{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer}.chip.on{background:var(--gr);color:var(--gt);border-color:var(--gr);font-weight:700}
+.day{font-size:12px;font-weight:700;color:var(--mu);margin:12px 0 6px;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--bd)}
+.legal{font-size:11px;color:var(--mu);border-left:3px solid var(--wa);padding-left:8px;margin-top:10px}
+nav{display:flex;border-top:1px solid var(--bd);background:var(--app)}
+nav button{flex:1;background:none;border:0;color:var(--mu);padding:10px 0 12px;font-size:11px;cursor:pointer}nav button b{display:block;font-size:17px}nav button.on{color:var(--gr);font-weight:700}
+.sheet{position:absolute;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end}.sheet.on{display:flex}
+.sheet>div{background:var(--app);width:100%;border-radius:18px 18px 0 0;padding:16px;max-height:80%;overflow:auto}
+.phone{position:relative}
+select{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:4px}
+</style></head><body>
+<div class="phone">
+
+<section class="scr on" id="inicio">
+<div class="top"><div><small>Jue 15 oct · Datos ficticios</small><h1>Hola, Camila 👋</h1></div><button class="av go" data-go="perfil" aria-label="Perfil">CR</button></div>
+<div class="card"><span class="tag">Próxima acción · HU-01</span>
+<h2 style="margin-top:8px">Continúa: Closures en JavaScript</h2><small>Curso de JavaScript Avanzado · lección 7 de 12</small>
+<button class="btn go" data-go="curso">Retomar clase</button></div>
+<div class="card go" data-go="calendario" style="border-color:var(--wa)"><div class="row"><b>Proyecto final · JavaScript Avanzado</b><span class="tag w">6 días</span></div><small>Entrega: mié 21 oct, 11:59 p. m. (HU-05)</small></div>
+<h2>Mis rutas activas</h2>
+<div class="card go" data-go="curso"><div class="row"><b>Ruta de Desarrollo Web</b><b>62%</b></div><div class="bar"><i style="width:62%"></i></div><small>5 de 8 cursos · en curso: JavaScript Avanzado</small></div>
+<div class="card go" data-go="curso"><div class="row"><b>Ruta de Análisis de Datos</b><b>18%</b></div><div class="bar"><i style="width:18%"></i></div><small>1 de 6 cursos · en curso: SQL Básico</small></div>
+<div class="card"><span class="tag">Hábito de estudio · HU-09</span><p style="margin-top:6px">Llevas 5 días sin avanzar en tu ruta. Con 20 minutos hoy retomas el ritmo.</p></div>
+<div class="card go" data-go="suscripcion"><div class="row"><b>Platzi Expert</b><span class="tag">Activa</span></div><small>Vence en 58 días · 12 dic 2026 (HU-12)</small></div>
+<div class="card"><small>Siguiente curso en tu ruta (HU-15)</small><p><b>Curso de Testing con JavaScript</b></p></div>
+</section>
+
+<section class="scr" id="curso">
+<button class="back go" data-go="inicio">← Inicio</button>
+<h1>Ruta de Desarrollo Web</h1><small>Progreso general 62% · actualizado al completar una lección</small>
+<div class="bar"><i style="width:62%"></i></div>
+<h2>Cursos</h2>
+<div class="card row"><span>Fundamentos de HTML y CSS</span><span class="tag">Completado</span></div>
+<div class="card row"><span>JavaScript Básico</span><span class="tag">Completado</span></div>
+<div class="card" style="border-color:var(--gr)"><div class="row"><b>JavaScript Avanzado</b><span class="tag w">En curso</span></div><div class="bar"><i style="width:58%"></i></div><small>Lección 7 de 12 · 1 proyecto · 1 quiz pendiente</small><button class="btn">Retomar lección</button></div>
+<div class="card row"><span>Testing con JavaScript</span><span class="tag w">No iniciado</span></div>
+<h2>Certificaciones (HU-03)</h2>
+<div class="card"><b>Fundamentos de HTML y CSS</b><br><small>Emitido: 03 jun 2026 · ID validación: DEMO-0001-HTML</small></div>
+<p class="legal">Datos académicos de demostración. En producción provienen del LMS de Platzi y se tratan según la política de protección de datos.</p>
+</section>
+
+<section class="scr" id="calendario">
+<h1>Plan de estudios</h1><small>Semana del 15 al 21 de octubre</small>
+<div class="chips" id="chips"><button class="chip on" data-f="all">Todo</button><button class="chip" data-f="live">Platzi Live</button><button class="chip" data-f="ent">Entregas</button><button class="chip" data-f="eva">Evaluaciones</button></div>
+<div class="day">Jue 15</div>
+<div class="card it" data-k="eva"><div class="row"><b>Quiz: Closures</b><span class="tag w">Pendiente</span></div><small>Evaluación · 20 min (HU-06)</small></div>
+<div class="day">Vie 16</div>
+<div class="card it" data-k="live"><div class="row"><b>Platzi Live: Arquitectura de componentes</b><span class="tag">Live</span></div><small>7:00 p. m. · con instructor (HU-04)</small></div>
+<div class="day">Mar 20</div>
+<div class="card it" data-k="live"><div class="row"><b>Platzi Live: Preguntas de Testing</b><span class="tag">Live</span></div><small>7:00 p. m.</small></div>
+<div class="day">Mié 21</div>
+<div class="card it" data-k="ent" style="border-color:var(--wa)"><div class="row"><b>Entrega: Proyecto final JS Avanzado</b><span class="tag w">6 días</span></div><small>Fecha límite 11:59 p. m. (HU-05)</small></div>
+<button class="btn s">Activar recordatorio de estudio</button>
+</section>
+
+<section class="scr" id="alertas">
+<h1>Notificaciones</h1><small>Alertas de clases, evaluaciones y suscripción</small>
+<div class="card go" data-go="suscripcion" style="border-color:var(--wa)"><span class="tag w">Suscripción</span><p style="margin-top:6px"><b>Tu Platzi Expert vence en 58 días.</b></p><small>Próxima alerta: 12 nov (a 30 días) · Toca para ver detalle (HU-08)</small></div>
+<div class="card go" data-go="calendario"><span class="tag">Platzi Live</span><p style="margin-top:6px">Mañana 7:00 p. m.: Arquitectura de componentes.</p></div>
+<div class="card go" data-go="calendario"><span class="tag w">Evaluación</span><p style="margin-top:6px">Tienes pendiente el quiz de Closures.</p></div>
+<div class="card"><span class="tag">Hábito</span><p style="margin-top:6px">Constancia: estudiar 20 min al día mejora tu avance.</p></div>
+<h2>Configuración (HU-07)</h2>
+<div class="card row"><span>Recordatorios de estudio</span><select><option>Diario</option><option>3 veces/semana</option><option>Semanal</option><option>Desactivado</option></select></div>
+<div class="card"><b>Alertas de vencimiento</b><div class="chips"><span class="chip on">30 días</span><span class="chip on">15 días</span><span class="chip on">7 días</span><span class="chip on">1 día</span></div></div>
+</section>
+
+<section class="scr" id="suscripcion">
+<h1>Platzi Expert</h1>
+<div class="card"><div class="row"><b>Estado</b><span class="tag">Activa</span></div><p style="margin-top:6px">Se renueva el <b>12 de diciembre de 2026</b></p><small>Faltan 58 días · sin cobros inesperados (HU-12)</small></div>
+<h2>¿Qué incluye cada cosa? (HU-11)</h2>
+<div class="card"><table><tr><th></th><th>Expert</th><th>Platzi Live</th></tr>
+<tr><td>Cursos y rutas</td><td>Acceso ilimitado</td><td>—</td></tr>
+<tr><td>Certificaciones</td><td>Incluidas</td><td>—</td></tr>
+<tr><td>Clases en vivo</td><td>Disponibles</td><td>Modalidad con instructor</td></tr></table></div>
+<button class="btn" id="open">Simular renovación anticipada</button>
+<p class="legal">Texto de ejemplo sujeto a validación de Legal. Esta pantalla no modifica precios ni beneficios reales de Platzi Expert (RNF-04).</p>
+</section>
+
+<section class="scr" id="perfil">
+<button class="back go" data-go="inicio">← Inicio</button>
+<h1>Camila Rojas (ficticia)</h1><small>camila.demo@ejemplo.com · Learner desde ene 2025</small>
+<h2>Certificaciones</h2><div class="card go" data-go="curso">1 certificación · ver historial</div>
+<h2>Privacidad y datos</h2>
+<div class="card"><small>Tus datos de progreso se usan solo para mostrar tu ruta y enviarte recordatorios. Cumple Habeas Data (Ley 1581/2012) y RGPD según tu país (HU-14).</small><button class="btn s">Gestionar permisos de notificación</button></div>
+</section>
+
+<nav><button class="on go" data-go="inicio"><b>🏠</b>Inicio</button><button class="go" data-go="calendario"><b>📅</b>Calendario</button><button class="go" data-go="alertas"><b>🔔</b>Alertas</button><button class="go" data-go="suscripcion"><b>⭐</b>Expert</button></nav>
+
+<div class="sheet" id="sheet"><div>
+<div class="row"><h1 style="font-size:17px">Simulador de renovación</h1><button class="back" id="close">Cerrar</button></div>
+<div class="chips"><button class="chip on" data-o="a">Renovar ahora</button><button class="chip" data-o="b">Renovar al vencer</button></div>
+<div class="card" id="res"></div>
+<p class="legal">Simulación informativa. No genera cobro ni cambia el precio de tu plan. Texto sujeto a validación de Legal.</p>
+<button class="btn" id="ok">Entendido</button></div></div>
+</div>
+<script>
+var S=document.querySelectorAll(".scr"),N=document.querySelectorAll("nav button");
+function go(id){S.forEach(function(s){s.classList.toggle("on",s.id===id)});
+N.forEach(function(b){b.classList.toggle("on",b.dataset.go===id)});document.getElementById(id).scrollTop=0}
+document.addEventListener("click",function(e){var t=e.target.closest("[data-go]");if(t)go(t.dataset.go)});
+document.querySelectorAll("#chips .chip").forEach(function(c){c.onclick=function(){
+document.querySelectorAll("#chips .chip").forEach(function(x){x.classList.toggle("on",x===c)});
+document.querySelectorAll(".it").forEach(function(i){i.style.display=(c.dataset.f==="all"||i.dataset.k===c.dataset.f)?"":"none"})}});
+var R={a:"<b>Renovar ahora</b><ul style='margin:6px 0 0 16px'><li>Continuidad de acceso a tu ruta y progreso</li><li>Sin interrupción en clases Platzi Live</li><li>Tu certificación en curso no se pausa</li></ul>",
+b:"<b>Renovar al vencer (12 dic)</b><ul style='margin:6px 0 0 16px'><li>Decides con tiempo: recibirás alertas a 30, 15, 7 y 1 día</li><li>Si no renuevas, el acceso termina al vencer</li></ul>"};
+function sim(k){document.getElementById("res").innerHTML=R[k];document.querySelectorAll("[data-o]").forEach(function(c){c.classList.toggle("on",c.dataset.o===k)})}
+document.querySelectorAll("[data-o]").forEach(function(c){c.onclick=function(){sim(c.dataset.o)}});
+function sh(v){document.getElementById("sheet").classList.toggle("on",v)}
+document.getElementById("open").onclick=function(){sim("a");sh(true)};
+document.getElementById("close").onclick=document.getElementById("ok").onclick=function(){sh(false)};
+</script></body></html>

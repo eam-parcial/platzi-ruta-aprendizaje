@@ -1,0 +1,11 @@
+{
+  "suscripcion": { "id": "sus-001", "estudiante_id": "est-001", "tipo": "Expert", "fecha_inicio": "2025-12-12", "fecha_vencimiento": "2026-12-12", "estado": "activa" },
+  "notificaciones": [
+    { "id": "n-001", "estudiante_id": "est-001", "tipo": "vencimiento", "fecha_envio": "2026-11-12", "leida": false, "nota": "Alerta programada a 30 días" },
+    { "id": "n-002", "estudiante_id": "est-001", "tipo": "clase_en_vivo", "fecha_envio": "2026-10-15", "leida": false },
+    { "id": "n-003", "estudiante_id": "est-001", "tipo": "evaluacion", "fecha_envio": "2026-10-15", "leida": false }
+  ],
+  "certificaciones": [
+    { "id": "cert-001", "estudiante_id": "est-001", "curso_id": "c-html", "fecha_emision": "2026-06-03", "id_validacion": "DEMO-0001-HTML" }
+  ]
+}

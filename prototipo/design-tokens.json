@@ -1,0 +1,10 @@
+{
+  "color": {
+    "dark":  { "bg": "#0A0E17", "surface": "#111827", "border": "#1F2937", "text": "#F3F6FB", "muted": "#8B95A7", "primary": "#00E58A", "onPrimary": "#04210F", "primaryTint": "#0B3B22", "warning": "#FBBF24", "warningTint": "#3A2A05" },
+    "light": { "bg": "#FFFFFF", "surface": "#F3F5F9", "border": "#DDE2EB", "text": "#0B1220", "muted": "#5B6577", "primary": "#0A8F55", "onPrimary": "#FFFFFF", "primaryTint": "#D8F5E6", "warning": "#B45309", "warningTint": "#FEF3C7" }
+  },
+  "typography": { "family": "system-ui, Roboto, 'Segoe UI', sans-serif", "title": 20, "section": 15, "body": 14, "caption": 12 },
+  "spacing": [4, 8, 12, 16, 24],
+  "radius": { "card": 14, "button": 10, "chip": 20, "sheet": 18 },
+  "touchTargetMin": 44
+}
