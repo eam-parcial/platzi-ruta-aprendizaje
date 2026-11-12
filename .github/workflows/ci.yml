@@ -1,0 +1,93 @@
+name: ci-platzi-ruta-aprendizaje
+
+# A.1 Cuándo se dispara
+on:
+  pull_request:
+    branches: [main]            # validar antes del merge
+  push:
+    branches: [main]            # release candidate tras el squash merge
+    tags: ["v*.*.*"]            # versión oficial (ej. v1.0.0)
+  schedule:
+    - cron: "0 5 * * *"         # nocturno: reconciliar datos ficticios vs. modelo
+  workflow_dispatch:            # manual (hotfix)
+
+permissions:
+  contents: write
+
+jobs:
+  ci:
+    name: Pipeline de pruebas
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout + caché
+      - name: "1 · Checkout"
+        uses: actions/checkout@v4
+
+      - name: "1 · Configurar Node 22"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # 2. Validación de formato y estructura
+      - name: "2 · Validar formato y estructura (EditorConfig, kebab-case, carpetas)"
+        run: node .github/ci/validar-formato.mjs
+
+      # 3. Build: export del prototipo (aún no hay app real)
+      - name: "3 · Build (export del prototipo)"
+        run: |
+          mkdir -p dist
+          cp -r prototipo datos-ficticios dist/
+          cp README.md CHANGELOG.md dist/
+
+      # 4. Pruebas + G1 (si fallan, no hay merge) + G2 (cobertura ≥ 70 % en alertas y renovación)
+      - name: "4 · Pruebas unitarias e integración + G1/G2 cobertura ≥ 70 %"
+        run: >
+          node --test
+          --experimental-test-coverage
+          --test-coverage-include="prototipo/logica/**"
+          --test-coverage-lines=70
+          ".github/ci/tests/*.test.mjs"
+
+      - name: "4 · Validar datos ficticios contra el modelo conceptual"
+        run: node .github/ci/validar-datos-ficticios.mjs
+
+      # 5. Calidad y seguridad
+      - name: "5 · G3 Datos personales (PII)"
+        run: node .github/ci/gate-pii.mjs
+
+      - name: "5 · G4 Textos legales y precios"
+        run: node .github/ci/gate-textos-legales.mjs
+
+      # 6. Empaquetar con versión + SHA corto
+      - name: "6 · Empaquetar artefacto versionado"
+        id: version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="0.0.0-dev"
+          fi
+          NOMBRE="ruta-aprendizaje-${VERSION}-${GITHUB_SHA::7}"
+          (cd dist && zip -qr "../${NOMBRE}.zip" .)
+          echo "nombre=${NOMBRE}" >> "$GITHUB_OUTPUT"
+          echo "Artefacto: ${NOMBRE}.zip"
+
+      # 7. Publicar artefacto (inmutable por SHA)
+      - name: "7 · Publicar artefacto"
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.version.outputs.nombre }}
+          path: ${{ steps.version.outputs.nombre }}.zip
+          retention-days: 30
+
+      - name: "7 · Release oficial (solo con tag v*.*.*)"
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "${{ steps.version.outputs.nombre }}.zip" --notes-file CHANGELOG.md
+
+      - name: Resumen
+        if: always()
+        run: |
+          echo "### Pipeline ci-platzi-ruta-aprendizaje" >> "$GITHUB_STEP_SUMMARY"
+          echo "Resultado: **${{ job.status }}** · commit \`${GITHUB_SHA::7}\`" >> "$GITHUB_STEP_SUMMARY"
